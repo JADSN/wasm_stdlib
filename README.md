@@ -1,5 +1,4 @@
-# wasm_stdlib
-Rust + Wasm without black hole (node_modules)
 # Rust stdlib for Web Assembly
+Rust + Wasm without node_modules "black hole"
 
-Just for educational purpose
+Just for educational purposes
