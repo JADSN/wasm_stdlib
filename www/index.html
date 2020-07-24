@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Rust + Wasm</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <style>
+  </style>
+
+<body>
+  <script>
+    const DEBUG = true
+    const debug = message => ((typeof (DEBUG) !== 'undefined') && (DEBUG === true)) ? (typeof (message) !== 'undefined') ? console.log(message) : false : false
+
+    window.Module = {}
+
+    const memory = new WebAssembly.Memory({ initial: 1, maximum: 10 });
+    const imports = { js: { mem: memory } }
+
+    fetch('chip8.wasm', {})
+      .then(response => response.arrayBuffer())
+      .then(bytes => WebAssembly.instantiate(bytes, imports ))
+      .then(results => {
+        Module.memory = results.instance.exports.memory
+        Module.debug_exports = results.instance.exports
+      })
+
+  </script>
+</body>
+
+</html>
